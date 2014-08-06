@@ -4,8 +4,10 @@ module.exports = (sequenceArray, varArray, finished) =>
 			varArray[key] = args[key]
 
 	prepArgs = (args) ->
-		prepped = _.map args, (item) ->
-			return varArray[item] or null
+		prepped = []
+		for key of args
+			prepped[key] = varArray[key] or null
+		prepped
 
 	callback = (returnArgs) =>
 		sequenceArray.shift()
