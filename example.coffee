@@ -32,3 +32,5 @@ third = (arg1, arg2, callback) ->
 	#we got so much stuff we can do
 	callback [{key:'dogs',value:true}]
 	
+doSequence()
+	
