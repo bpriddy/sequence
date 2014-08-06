@@ -1,7 +1,7 @@
 module.exports = (sequenceArray, varArray, finished) =>
 	applyArgs = (args) ->
-		_.each args, (item) ->
-			varArray[item.key] = item.value
+		for key of args ->
+			varArray[key] = args[key]
 
 	prepArgs = (args) ->
 		prepped = _.map args, (item) ->
