@@ -1,38 +1,47 @@
-var Sequence = (sequenceArray, options, finished) {
-	var varArray = options || {};
+function Sequence(sequenceArray, options) {
+	var varArray = {};
+	if(options && options.args) {
+		varArray = options.args
+	}
+	
 	var applyArgs = function(args) {
-		for(var i=0;i<args.length;i++) {
-			varArray[sequenceArray[0].o[i]] = args[i]
+		if(args) {
+			for(var i=0;i<args.length;i++) {
+				varArray[sequenceArray[0].o[i]] = args[i];
+			}
 		}
 	}
-
 	var prepArgs = function(args) {
-		prepped = []
-		for(key of args) {
-			if(varArray[key]) {
-				prepped[key] = varArray[key]
-			} else {
-				prepped[key] = null
+		var prepped = []
+		if(args) {
+			console.log(varArray[args[0]])
+			for(var i=0; i<args.length;i++) {
+				if(varArray[args[i]]) {
+					prepped.push(varArray[args[i]]);
+				} else {
+					prepped.push(null);
+				}
 			}
 		}
 		return prepped
 	}
 
-	var callback = function(returnArgs) {
-		applyArgs(returnArgs)
+	var callback = function() {
+		applyArgs(arguments)
 		sequenceArray.shift()
 		if(sequenceArray.length) {
 			run()
 		} else {
-			finished.apply(varArray)
+			options.finished.apply(varArray)
 		}
 	}
 
-	var run =  function() {
-		args = prepArgs(sequenceArray[0].i)
+	var run = function() {
+		var args = prepArgs(sequenceArray[0].i)
 		args.push(callback)
 		sequenceArray[0].fn.apply(this,args)
 	}
 
-	run()
+	run();
+	
 }
