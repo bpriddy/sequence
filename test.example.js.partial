@@ -1,0 +1,11 @@
+ Sequence(
+            [
+                { fn:this.setupObj.bind(this) },
+                { fn:this.bindEvents.bind(this) },
+                { fn:this.runChecks.bind(this), o:['results'] },
+                { fn:this.setupEnvironment.bind(this), i:['results'] }
+            ],
+            {
+                completed: this.finishedInit.bind(this)
+            }
+        )
