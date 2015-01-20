@@ -32,7 +32,7 @@ function Sequence(sequenceArray, options) {
 		if(sequenceArray.length) {
 			run()
 		} else {
-			options.finished.apply(varArray)
+			options.completed.apply(varArray)
 		}
 	}
 
